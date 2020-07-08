@@ -2,6 +2,8 @@
 
 A simple GUI tool to set the backlight brightness.
 
+![Screenshot](screenshot.jpg)
+
 # Setup 
 
 1. Install Python dependencies: `./install-deps.sh`
@@ -10,3 +12,5 @@ A simple GUI tool to set the backlight brightness.
 # Usage 
 
 `./run`
+
+
