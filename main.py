@@ -2,6 +2,9 @@ import sys
 from PySide2.QtUiTools import QUiLoader
 from PySide2.QtWidgets import QApplication
 from PySide2.QtCore import QFile, QIODevice
+import os
+
+sdir = os.path.dirname(os.path.realpath(__file__))
 
 brightness_file = "/sys/class/backlight/intel_backlight/brightness"
 max_brightness_file = "/sys/class/backlight/intel_backlight/max_brightness"
@@ -9,7 +12,7 @@ max_brightness_file = "/sys/class/backlight/intel_backlight/max_brightness"
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
-    ui_file_name = "mainwindow.ui"
+    ui_file_name = os.path.join(sdir, "mainwindow.ui")
     ui_file = QFile(ui_file_name)
     if not ui_file.open(QIODevice.ReadOnly):
         print("Cannot open {}: {}".format(ui_file_name, ui_file.errorString()))
