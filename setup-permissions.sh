@@ -3,7 +3,7 @@
 brightness_file="/sys/class/backlight/intel_backlight/brightness"
 # You can use any group name you are already included.
 # see `id` output.
-group="${1:-brightness}"
+group="${1:-video}"
  
 echo "Using group name: $group"
 # Create the new group if it doesn't exist:
