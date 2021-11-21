@@ -14,3 +14,6 @@ A simple GUI tool to set the backlight brightness.
 `./run`
 
 
+# Development
+
+If you edit the `.ui` file, you must transpile it to `mainwindow.py` file by issuing `make`.

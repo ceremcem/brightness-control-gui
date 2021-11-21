@@ -1,6 +1,6 @@
 import sys
 from PySide2.QtUiTools import QUiLoader
-from PySide2.QtWidgets import QApplication
+from PySide2.QtWidgets import QApplication, QMainWindow
 from PySide2.QtCore import QFile, QIODevice
 import os
 
@@ -12,6 +12,8 @@ max_brightness_file = "/sys/class/backlight/intel_backlight/max_brightness"
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
+    """
+    # Load the user inteface directly from .ui file
     ui_file_name = os.path.join(sdir, "mainwindow.ui")
     ui_file = QFile(ui_file_name)
     if not ui_file.open(QIODevice.ReadOnly):
@@ -20,10 +22,18 @@ if __name__ == "__main__":
     loader = QUiLoader()
     ui = window = loader.load(ui_file)
     ui_file.close()
+
     if not window:
         print(loader.errorString())
         sys.exit(-1)
     window.show()
+    """
+    # Load the user interface from the transpiled .ui file
+    from mainwindow import Ui_MainWindow
+    MainWindow = QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
 
     with open(max_brightness_file) as f: 
         max_brightness = int(f.read())
