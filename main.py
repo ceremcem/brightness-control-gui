@@ -12,7 +12,7 @@ max_brightness_file = "/sys/class/backlight/intel_backlight/max_brightness"
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
-    """
+    
     # Load the user inteface directly from .ui file
     ui_file_name = os.path.join(sdir, "mainwindow.ui")
     ui_file = QFile(ui_file_name)
@@ -34,6 +34,7 @@ if __name__ == "__main__":
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
+    """
 
     with open(max_brightness_file) as f: 
         max_brightness = int(f.read())
@@ -59,7 +60,14 @@ if __name__ == "__main__":
         val = ui.horizontalSlider.value()
         set_brightness(val)
 
+    def set_redness(val):
+        os.system('redshift -P -O' + str(val))
+
     ui.horizontalSlider.setValue(get_brightness())
     ui.horizontalSlider.valueChanged.connect(slider_changed)
+
+    ui.horizontalSlider_2.valueChanged.connect(set_redness)
+    ui.pushButton_2.clicked.connect(lambda val: ui.horizontalSlider_2.setValue(6500))
+    ui.pushButton.clicked.connect(lambda val: ui.horizontalSlider_2.setValue(4500))
 
     sys.exit(app.exec_())
