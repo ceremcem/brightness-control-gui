@@ -16,4 +16,4 @@ A simple GUI tool to set the backlight brightness.
 
 # Development
 
-If you edit the `.ui` file, you must transpile it to `mainwindow.py` file by issuing `make`.
+Edit the `.ui` file and/or `main.py`, with Qt 5 Designer and re-run the `main.py` file.
