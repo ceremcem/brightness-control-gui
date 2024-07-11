@@ -8,6 +8,7 @@ sdir = os.path.dirname(os.path.realpath(__file__))
 
 brightness_file = "/sys/class/backlight/intel_backlight/brightness"
 max_brightness_file = "/sys/class/backlight/intel_backlight/max_brightness"
+temperature_file = "/tmp/display_temperature_value"
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
@@ -38,6 +39,15 @@ if __name__ == "__main__":
 
     with open(max_brightness_file) as f: 
         max_brightness = int(f.read())
+
+    # read the temperature value from config file:
+    with open(temperature_file, "a+") as c:
+        pass # make sure that configuration file exists
+
+    with open(temperature_file, "r") as c:
+        curr_temp = int(c.read() or 0)
+        ui.horizontalSlider_2.setValue(curr_temp)
+
 
     def set_brightness(val):
         new_val = int(val / 100 * max_brightness)
@@ -70,4 +80,8 @@ if __name__ == "__main__":
     ui.pushButton_2.clicked.connect(lambda val: ui.horizontalSlider_2.setValue(6500))
     ui.pushButton.clicked.connect(lambda val: ui.horizontalSlider_2.setValue(4500))
 
-    sys.exit(app.exec_())
+    exit_code = app.exec_()
+    with open(temperature_file, "w") as c:
+        c.write(str(ui.horizontalSlider_2.value()))
+
+    sys.exit(exit_code)
